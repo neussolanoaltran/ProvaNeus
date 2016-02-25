@@ -1,0 +1,43 @@
+<html ng-app="miaplicacion">
+<head>
+<script type="text/javascript" src="angular.min.js"> 
+</script>
+<script type="text/javascript">
+
+var miaplicacion=angular.module("miaplicacion",[]);
+
+miaplicacion.service("servicioFacturas",function() {
+
+    this.buscarFacturas = function() {
+
+        var factura= {"id":"A","concepto":"mac","importe":1000};
+        var factura2= {"id":"B","concepto":"Iphone","importe":700};
+        var listaFacturas=[];
+        listaFacturas.push(factura);
+        listaFacturas.push(factura2);
+        return listaFacturas;
+    }
+
+});
+
+miaplicacion.controller("controladorFactura",['$scope','servicioFacturas', function($scope,servicioFacturas) {
+
+
+$scope.listaFacturas=servicioFacturas.buscarFacturas();
+
+}]);
+
+
+
+</script>
+</head>
+<body ng-controller="controladorFactura">
+<table>
+<tr ng-repeat="factura in listaFacturas">
+<td>{{factura.id}}</td>
+<td>{{factura.concepto | uppercase }}</td>
+<td>{{factura.importe}}</td>
+</tr>
+</table>
+</body>
+</html>
